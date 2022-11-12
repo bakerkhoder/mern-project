@@ -4,10 +4,16 @@ import Posts from "./components/posts/posts";
 import  Form from "./components/form/form"
 import memories from "./images/memories1.png"
 import useStyles from"./styles"
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import {getposts} from "./actions/posts"
 const App=()=>{
 
     const classes = useStyles()
+    const disptach =useDispatch()
+    useEffect(()=>{
+    disptach(getposts())
+    },[disptach])
     return(
      <Container maxWidth="lg">
        <AppBar className={classes.appBar} position="static" color="inherit">
@@ -21,7 +27,7 @@ const App=()=>{
                    <Posts></Posts>
                  </Grid>
                  <Grid item xs={12} sm={4}>
-                    <Form></Form>
+                   <Form></Form>
                  </Grid>
             </Grid>
           </Container>

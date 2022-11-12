@@ -1,6 +1,6 @@
 import React from "react";
-import useStyles from "./styles"
-const post=()=>{
+// import useStyles from "./styles"
+const Post=()=>{
     
     // const classes = useStyles()
     return(
@@ -11,4 +11,4 @@ const post=()=>{
        
     )
 }
-export default post
+export default Post

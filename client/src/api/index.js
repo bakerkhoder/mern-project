@@ -1,4 +1,7 @@
 import axios from "axios"
-const url ="http://localhost:500-/posts"
+const url ="http://localhost:5000/posts"
 
 export const fetchposts=()=>axios.get(url)
+// then((res)=>{console.log(res.data)
+// return res.data}
+// )

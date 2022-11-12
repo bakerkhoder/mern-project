@@ -1,12 +1,16 @@
 import React from "react";
-import usestyles from "./style"
+import { TextField,Button,Typography, Paper } from "@material-ui/core"; 
+
+ import useStyles from "./style"
 
 
-const form=()=>{
+const Form=()=>{
     
-    // const classes = useStyles()
+     const classes = useStyles()
     return(
-        <h1>form</h1>
+       <Paper className={classes.Paper}>
+hi
+       </Paper>
     )
 }
-export default form
+export default Form
