@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import Post from "./post/post";
 import useStyles from "./styles"
 import { Grid,CircularProgress } from "@material-ui/core";
-import {Card,CardActions,CardMedia,Button,Typography,CardContent,} from "@material-ui/core";
-import ThumbUpAltIcon from "@materiel-ui/icons/ThumbUpAl"
 
 
 
