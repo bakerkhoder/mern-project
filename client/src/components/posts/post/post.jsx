@@ -5,11 +5,14 @@ import ThumbUp from "@material-ui/icons/ThumbUpAlt"
 import DeleteIcon from "@material-ui/icons/Delete"
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz"
 import moment from 'moment'
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../actions/posts";
 
 // 7el esset licon jiba de8ri w 7eta bfile asssests
 const Post=({post,setCurrentId})=>{
 //    6370787ef6a4d0816fe8236d
     const classes = useStyles()
+    const distpatch=useDispatch()
     return(
     
         <Card className={classes.card}>
@@ -29,10 +32,10 @@ const Post=({post,setCurrentId})=>{
             </div>
             <Typography  className={classes.title} variant="h5" gutterBottom>{post.Title}</Typography>
              <CardContent>
-              <Typography  variant="body2" color="textsecondary" component="p">{post.message}</Typography>
+              <Typography  variant="body2" color="textsecondary" component="p">{post.Message}</Typography>
              </CardContent>
              <CardActions className={classes.cardActions}>
-              <Button size="small" color="primary" onClick={()=>{}}>
+              <Button size="small" color="primary" >
               <ThumbUp fontSize="small"/>
              
                
@@ -44,7 +47,7 @@ const Post=({post,setCurrentId})=>{
              
               </Button> 
               
-              <Button size="small" color="primary" onClick={()=>{}}>
+              <Button size="small" color="primary"onClick={()=>distpatch(deletePost(post._id))}>
               <DeleteIcon fontSize="small"/>
               delete
               </Button>
