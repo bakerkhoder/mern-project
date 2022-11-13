@@ -6,5 +6,5 @@ import {updatedPost} from"../controllers/posts.js"
 
 router.get("/",getposts)
 router.post("/",createPost)
-router.patch("./:id",updatedPost)
+router.patch("/:id",updatedPost)
 export default router;
