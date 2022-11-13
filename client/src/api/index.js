@@ -5,3 +5,4 @@ export const fetchposts=()=>axios.get(url)
 // then((res)=>{console.log(res.data)
 // return res.data}
 // )
+ export const createpost=(newpost)=>axios.post(url,newpost)

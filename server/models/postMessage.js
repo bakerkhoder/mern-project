@@ -1,16 +1,11 @@
 import mongoose from "mongoose";
  const postschema=mongoose.Schema(
     {
-        title:String,
-        message:String,
-        name:String,
-        creator:String,
-        tags:[String],
-        selectedFile:String,
-        likes:{
-            type:[String],
-            default:[],
-        },
+        Title:String,
+        Message:String,
+        Creator:String,
+        Tags:String,
+        SelectedFile:String,
         createdAt:{
          type:Date,
          default:new Date()
