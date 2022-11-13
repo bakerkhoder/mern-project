@@ -10,6 +10,10 @@ import mongoose from "mongoose";
          type:Date,
          default:new Date()
         },
+        likeCount:{
+            type:Number,
+            default:0
+        },
     }
  );
  const PostMessage=mongoose.model('PostMessage',postschema);
