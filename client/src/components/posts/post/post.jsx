@@ -37,15 +37,8 @@ const Post=({post,setCurrentId})=>{
               <Button size="small" color="primary" onClick={()=>{distpatch(likePost(post._id)
                 
                 )}} >
-              <ThumbUp fontSize="small"/>
-             
-               
-              like
-            
-           
-         
-              {post.likeCount}
-             
+              <ThumbUp fontSize="small"/>            
+                &nbsp;like&nbsp; {post.likeCount}
               </Button> 
               
               <Button size="small" color="primary"onClick={()=>distpatch(deletePost(post._id))}>

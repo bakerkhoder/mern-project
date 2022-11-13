@@ -16,9 +16,7 @@ export const createPost= async(req,res)=>{
 //   console.log(req)
 const newPostMessage=new PostMessage(post)
     try { 
-      await  newPostMessage.save((err,doc)=>
-        console.log("saved"));
-      
+      await  newPostMessage.save();
         res.status(201).json(newPostMessage );
     } catch (error) {
         res.status(409).json({message: error.message });
@@ -43,7 +41,6 @@ export const deletePost=async(req,res)=>{
  if(!mongoose.Types.ObjectId.isValid(id)) 
  return res.status(404).send('no post wuth that id') 
  await PostMessage.findByIdAndRemove(id);
- console.log('delete')
  res.json({message:'post deleted successfully'})
 
 }
