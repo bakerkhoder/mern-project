@@ -3,16 +3,17 @@ import mongoose from "mongoose";
     {
         Title:String,
         Message:String,
+        name:String,
         Creator:String,
-        Tags:String,
+        Tags:[String],
         SelectedFile:String,
         createdAt:{
          type:Date,
          default:new Date()
         },
-        likeCount:{
-            type:Number,
-            default:0
+        likes:{
+            type:[String],
+            default:[]
         },
     }
  );
