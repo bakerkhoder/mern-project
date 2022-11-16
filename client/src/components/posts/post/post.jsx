@@ -16,9 +16,9 @@ const Post=({post,setCurrentId})=>{
     const distpatch=useDispatch()
     const user =JSON.parse(localStorage.getItem('profile'))
     //  console.log(post.likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id)))
-     function refreshPage() {
-    window.location.reload(false);
-  }   
+  //    function refreshPage() {
+  //   window.location.reload(false);
+  // }   
     const Likes=()=>  {
     return(post.likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id))
       ?(<><ThumbUpAlt fontSize="small"/> &nbsp;{post.likes.length } </> )
@@ -26,8 +26,8 @@ const Post=({post,setCurrentId})=>{
     )
     }
 
-
-   
+    // console.log( user?.result?._id)
+    // console.log(post?.Creator)
 
     return(
     
@@ -37,12 +37,13 @@ const Post=({post,setCurrentId})=>{
               <Typography variant="h6">{post.name}</Typography>
               <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
+            {(user?.result?.googleId ===post?.Creator || user?.result?._id  === post?.Creator) && (
             <div className={classes.overlay2}>
               <Button style={{color:'white'}} size="small" onClick={()=>{ setCurrentId(post._id)}} >
               <MoreHorizIcon fontSize="default"/>
               
               </Button>
-            </div>
+            </div>)}
             <div className={classes.details}>
               <Typography variant="body2" color="textSecondary">{`#${post.Tags}`}</Typography>
             </div>
@@ -57,11 +58,12 @@ const Post=({post,setCurrentId})=>{
                <Likes/>
                
               </Button> 
-              
-              <Button size="small" color="primary"onClick={()=>distpatch(deletePost(post._id))}>
+              {(user?.result?.googleId ===post?.Creator || user?.result?._id  === post?.Creator) && (   <Button size="small" color="primary"onClick={()=>distpatch(deletePost(post._id))}>
               <DeleteIcon fontSize="small"/>
               delete
-              </Button>
+              </Button>)}
+              
+           
 
              </CardActions>
           

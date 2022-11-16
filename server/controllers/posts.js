@@ -14,8 +14,9 @@ export const getposts=async  (req,res)=>{
 export const createPost= async(req,res)=>{
   const post=req.body;
 //   console.log(req)
-const newPostMessage=new PostMessage({...post,  Creator:req.userId,CreatedAt:new Date().toISOString})
+const newPostMessage=new PostMessage({...post,  Creator:req.userid,CreatedAt:new Date().toISOString})
     try { 
+      // console.log(req.userid)
       await  newPostMessage.save();
         res.status(201).json(newPostMessage );
     } catch (error) {
@@ -53,7 +54,6 @@ export const likePost =async(req,res)=>{
   const post= await PostMessage.findById(id)
  
   const index =post.likes.findIndex((id)=> id === String(req.userid))///hon jarib t7la 7et userid w red decoded data kamen hek
-  console.log(index)
   if(index ==-1){
     post.likes.push(req.userid)
   }
@@ -61,7 +61,6 @@ export const likePost =async(req,res)=>{
 //     function chechliked(id) {
 //   return id!==String(req.userid);
 // }
-console.log("else")
 
 
    var arr= post.likes.filter(ids => ids !== req.userid)

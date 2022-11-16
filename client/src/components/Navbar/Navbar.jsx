@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import useStyles from'./styles'
 import { NavLink } from 'react-router-dom'
 import { useHistory,useLocation } from 'react-router-dom'
+import decode from "jwt-decode"
 const Navbar = () => {
     const classes=useStyles()
     const dispatch=useDispatch()
@@ -20,6 +21,10 @@ const Navbar = () => {
     useEffect(()=>{
       const token=user?.token
 
+      //// it need to be fixed
+        // const decodedToken =decode(token)
+        // console.log(decodedToken)
+        // if(decodedToken.exp *1000 < new Date().getTime()) logout()
       ///jwt...
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location])
