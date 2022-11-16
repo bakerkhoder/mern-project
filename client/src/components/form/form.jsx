@@ -28,8 +28,9 @@ const Form=({currentId, setCurrentId})=>{
     }
     const Clear =()=>{
     setCurrentId(null)
-    setPostData({Title:'',Message:'',Tags:'',SelectedFile:''})//here as we
+    setPostData({Title:'',Message:'',Tags:'',SelectedFile:''})}//here as we
    if(!user?.result?.name){
+    console.log(user)
       return(
         <Paper className="classes.paper">
            <Typography variant="h6" align="center" >
@@ -38,7 +39,7 @@ const Form=({currentId, setCurrentId})=>{
         </Paper>
       )
     }
-    }
+    
     return(
        <Paper className={classes.Paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>

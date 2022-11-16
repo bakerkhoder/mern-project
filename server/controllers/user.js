@@ -11,7 +11,7 @@ export const signin=async(req,res)=>{
     if(!existinguser)  return res.status(404).json({message:"user does not exist"})
     const ispasswordcorrect=(password==existinguser.password)
     if(!ispasswordcorrect) return res.status(400).json({message:"invalid credentials"})
-    const token=jwt.sign({email:existinguser.email,id:existinguser.id},'test',{expiresIn:"1h"})
+    const token=jwt.sign({email:existinguser.email,id:existinguser._id},'test',{expiresIn:"1h"})
     res.status(200).json({result:existinguser,token}) 
  }
    
@@ -34,7 +34,7 @@ export const signup=async(req,res)=>{
  const result=await User.create({"email":email,"password":password,"name":`${firstname} ${lastname}`})
 
  const token=jwt.sign({email:result.email,id:result.id},'test',{expiresIn:"1h"})
- 
+
 
  res.status(200).json({result,token}) 
  console.log(token)
