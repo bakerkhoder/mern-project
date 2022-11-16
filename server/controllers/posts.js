@@ -20,7 +20,6 @@ const newPostMessage=new PostMessage({...post,  Creator:req.userId,CreatedAt:new
         res.status(201).json(newPostMessage );
     } catch (error) {
         res.status(409).json({message: error.message });
-        console.log("ma3 eno saved bas hek")
     
     }
 }
@@ -47,21 +46,28 @@ export const deletePost=async(req,res)=>{
 }
 
 export const likePost =async(req,res)=>{
-   console.log(req.userid)
   if(!req.userid) return res.json({message:"Unauthenticated"})
   const{id}=req.params;
   if(!mongoose.Types.ObjectId.isValid(id))
   return res.status(404).send('no post with that id')
   const post= await PostMessage.findById(id)
-
-  const index =post.likes.findIndex((id)=> id === string(req.userid))///hon jarib t7la 7et userid w red decoded data kamen hek
-  
-  if(index ===-1){
-    post.likes.push(req.userId)
+ 
+  const index =post.likes.findIndex((id)=> id === String(req.userid))///hon jarib t7la 7et userid w red decoded data kamen hek
+  console.log(index)
+  if(index ==-1){
+    post.likes.push(req.userid)
   }
   else{
-    post.likes.filter((id)=> id!== String(req.userId))
+//     function chechliked(id) {
+//   return id!==String(req.userid);
+// }
+console.log("else")
+
+
+   var arr= post.likes.filter(ids => ids !== req.userid)
+    post.likes=arr
   }
+  
   const updatedPost= await PostMessage.findByIdAndUpdate(id,post,{new:true})
   res.json(updatedPost)
 }

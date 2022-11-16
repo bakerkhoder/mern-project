@@ -8,7 +8,6 @@ const auth=async (req,res,next)=>{
        if(token&&isCustomAuth){
         decodedata=jwt.verify(token,'test')
          req.userid=decodedata?.id
-         console.log(decodedata)
         // console.log("mn hon")
         // console.log(decodedata)//hooooon jarib iat
         // console.log("lahon")
@@ -16,7 +15,7 @@ const auth=async (req,res,next)=>{
        else{
         decodedata=jwt.decode(token)
         req.userid=decodedata?.sub
-        console.log(decodedata)
+       
        }
        next()
     }
