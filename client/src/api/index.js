@@ -9,6 +9,7 @@ API.interceptors.request.use((req)=>{
     return req;
 })
 export const fetchposts=()=>API.get('/posts')
+export const fetchPostsBySearch=(searchQuery)=>API.get(`/posts/search?searchQuery=${searchQuery.search || "none"} &tags=${searchQuery.tags}`)
 // then((res)=>{console.log(res.data)
 // return res.data}
 // )

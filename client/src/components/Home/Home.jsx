@@ -6,7 +6,7 @@ import Posts from "../posts/posts";
 import Form from '../form/form';
 import Pagination from "../Pagination"
 import { useDispatch } from "react-redux";
-import { getposts } from  "../../actions/posts"
+import { getposts ,getPostsBySearch} from  "../../actions/posts"
 import useStyles from "./styles"
 
 function useQuery(){
@@ -24,11 +24,22 @@ const Home = () => {
     const[search,setSearch]=useState('')
     const[tags,setTags]=useState([])
 
-
+    
     useEffect(()=>{
     disptach(getposts())
     },[disptach])
 
+    const searchPost=()=>{
+      if(search.trim() ||  tags){
+       
+        disptach(getPostsBySearch({search,tags:tags}))
+     //console.log(search)
+   //  console.log(tags)
+      }
+      else{
+         history.push('/')
+      }
+    }
     const handleKeyPress=(e)=>{
       if(e.keyCode===13){
            //search post
@@ -37,6 +48,10 @@ const Home = () => {
  
     const handleAdd=(tag)=>setTags([...tags,tag])
     const handleDelete=(tagToDelete)=> setTags(tags.filter((tag)=>tag !== tagToDelete))
+
+
+   //m7iha bas tt2akad mn eno a5ada la2n ymkn leziim ba3d lfilter t7t bvariable w trja3 t3tiha yeha
+
 
   return (
      <Grow in>
@@ -67,7 +82,7 @@ const Home = () => {
                      
                      />
                    
-
+                  <Button onClick={searchPost} variant="contained" className={classes.searchButton} color="primary">Search</Button>  
                   </AppBar>
                    <Form currentId={currentId} setCurrentId={setCurrentId} />
                    <Paper  elevation={6} >
