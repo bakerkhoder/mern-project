@@ -41,9 +41,9 @@ const Form=({currentId, setCurrentId})=>{
     }
     
     return(
-       <Paper className={classes.Paper}>
+       <Paper className={classes.Paper} elevation={6}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-            <Typography variant="h6">{currentId?'Editing':'Creating'}</Typography>
+            <Typography variant="h6">{currentId?'Editing':'Creating a Memory'}</Typography>
             {/* <TextField name="Creator" variant="outlined" label="Creator" fullWidth value={postData.Creator}
              onChange={(e)=> setPostData({...postData,Creator:e.target.value})}/> */}
              <TextField name="Title" variant="outlined" label="Title" fullWidth value={postData.Title}

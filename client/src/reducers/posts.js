@@ -1,9 +1,16 @@
 
 
-import { START_LOADING,END_LOADING,CREATE,UPDATE,FETCH_ALL,FETCH_BY_SEARCH,DELETE } from "../constants/actionTypes";
-export default  (state=[],action)=>{
+import { START_LOADING,END_LOADING,FETCH_POST, CREATE,UPDATE,FETCH_ALL,FETCH_BY_SEARCH,DELETE,LIKE } from "../constants/actionTypes";
+export default  (state={isLoading:true,posts:[]},action)=>{
     switch(action.type){
      
+        case START_LOADING:
+     
+         return{...state,isLoading:true}
+        case END_LOADING:
+
+         return{...state,isLoading:false}
+
         case FETCH_ALL:
              return {
                 ...state,
@@ -13,13 +20,16 @@ export default  (state=[],action)=>{
              };
         case FETCH_BY_SEARCH:
             return {...state,posts:action.payload}   
+        case FETCH_POST:
+            return {...state,posts:action.payload}   
         case CREATE:
-            return [...state,action.payload]
+            return {...state,post:[action.payload]}
         case UPDATE:
-            return state.map((post)=>post._id===action.payload._id? action.payload:post)    
+            return {...state,posts:state.posts.map((post)=>post._id===action.payload._id? action.payload:post)    }
         case DELETE:
-              return state.filter((post)=>post._id!==action.payload)
-        
+              return {...state,posts:state.posts.filter((post)=>post._id!==action.payload)}
+        case LIKE:
+            return {...state,posts:state.posts.map((post)=>post._id===action.payload._id ? action.payload:post)}
             
         default:
             return state;         

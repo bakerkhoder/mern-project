@@ -1,5 +1,28 @@
 import PostMessage from "../models/postMessage.js"
 import mongoose from "mongoose";
+
+
+export const getPost= async (req,res)=>{
+  const{id}=req.params
+  try{
+    console.log("fete")
+    console.log(id)
+    const post =await PostMessage.findById(id)
+    console.log("jebto")
+    console.log(post)
+    res.status(200).json(post)
+  }
+  catch(error){
+    res.status(404).json({message:error.message})
+  }
+}
+
+
+
+
+
+
+
 export const getposts=async  (req,res)=>{
       const {page}=req.query
 
@@ -24,8 +47,6 @@ export const getPostsBySearch=async(req,res)=>{
   // it need to be fixed
    const posts =await PostMessage.find({$or: [{Title:searchQuery},{Tags:[tags]}]})
    res.json({data:posts})
-
-   
   }
   catch(error){
     res.status(404).json({message:error.message})
@@ -36,10 +57,8 @@ export const getPostsBySearch=async(req,res)=>{
 
 export const createPost= async(req,res)=>{
   const post=req.body;
-//   console.log(req)
 const newPostMessage=new PostMessage({...post,  Creator:req.userid,CreatedAt:new Date().toISOString})
     try { 
-      // console.log(req.userid)
       await  newPostMessage.save();
         res.status(201).json(newPostMessage );
     } catch (error) {
@@ -81,15 +100,9 @@ export const likePost =async(req,res)=>{
     post.likes.push(req.userid)
   }
   else{
-//     function chechliked(id) {
-//   return id!==String(req.userid);
-// }
-
-
    var arr= post.likes.filter(ids => ids !== req.userid)
     post.likes=arr
   }
-  
   const updatedPost= await PostMessage.findByIdAndUpdate(id,post,{new:true})
   res.json(updatedPost)
 }

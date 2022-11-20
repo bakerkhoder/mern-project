@@ -1,6 +1,25 @@
 import * as api from "../api/index"
-import { FETCH_ALL,CREATE,DELETE,LIKE,UPDATE,FETCH_BY_SEARCH ,START_LOADING,END_LOADING} from "../constants/actionTypes";
+import { FETCH_ALL,FETCH_POST, CREATE,DELETE,LIKE,UPDATE,FETCH_BY_SEARCH ,START_LOADING,END_LOADING} from "../constants/actionTypes";
 //action creators 
+
+export const getPost=(id)=>async(dispatch)=>{
+   try{
+        dispatch({type:START_LOADING})
+        console.log("mn hon")
+        const{data}= await api.fetchPost(id);
+        console.log(data)
+       await dispatch({type:FETCH_POST,payload:data})
+               console.log("hon mtwa2if")
+
+        dispatch({type:END_LOADING})
+       console.log("tam")
+       
+    }
+    catch(error){
+        console.log(error.message)
+    }
+}  
+
 
 export const getposts=(page)=>async(dispatch)=>{
     try{

@@ -16,6 +16,11 @@ export const fetchPostsBySearch=(searchQuery)=>API.get(`/posts/search?searchQuer
 // then((res)=>{console.log(res.data)
 // return res.data}
 // )
+
+ export const fetchPost=(id)=>API.get(`/posts/${id.id}`)
+
+
+
  export const createpost=(newpost)=>API.post('/posts',newpost)
  export const updatePost=(id,updatedPost)=>API.patch(`/posts/${id}`,updatedPost)
  export const deletePost=(id)=>API.delete(`/posts/${id}`)
