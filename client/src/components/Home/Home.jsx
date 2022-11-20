@@ -19,20 +19,22 @@ const Home = () => {
     const query=useQuery()
     const history=useHistory()
     const page =query.get("page") || 1;
+    console.log(page)
     const searchQuery =query.get("searchQuery")
     const classes=useStyles()
     const[search,setSearch]=useState('')
     const[tags,setTags]=useState([])
 
     
-    useEffect(()=>{
-    disptach(getposts())
-    },[disptach])
+    // useEffect(()=>{
+    // disptach(getposts())
+    // },[disptach])
 
     const searchPost=()=>{
       if(search.trim() ||  tags){
        
         disptach(getPostsBySearch({search,tags:tags}))
+        history.push(`/posts/search?searchQuery=${search || "none"}&tags=${tags}`)
      //console.log(search)
    //  console.log(tags)
       }
@@ -56,7 +58,7 @@ const Home = () => {
   return (
      <Grow in>
           <Container maxWidth="xl" >
-            <Grid container  justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
+            <Grid container  justifyContent="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
                  <Grid item xs={12} sm={6} md={9}>
                    <Posts  currentId={currentId} setCurrentId={setCurrentId}/>
                  </Grid>
@@ -86,7 +88,7 @@ const Home = () => {
                   </AppBar>
                    <Form currentId={currentId} setCurrentId={setCurrentId} />
                    <Paper  elevation={6} >
-                       <Pagination/>
+                       <Pagination page={page}/>
                    </Paper>
                  </Grid>
             </Grid>

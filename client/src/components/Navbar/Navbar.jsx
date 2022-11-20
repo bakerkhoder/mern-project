@@ -1,9 +1,11 @@
 import React, { useState ,useEffect} from 'react'
 import { AppBar,Toolbar,Typography ,Button,Avatar} from '@material-ui/core'
 import memories from "../../images/memories2.png"
+import memoriesLogo from "../../images/memoriesLogo.png"
+import memoriesText from "../../images/memoriesText.png"
 import { useDispatch } from 'react-redux'
 import useStyles from'./styles'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useHistory,useLocation } from 'react-router-dom'
 import decode from "jwt-decode"
 const Navbar = () => {
@@ -30,10 +32,10 @@ const Navbar = () => {
     },[location])
   return (
        <AppBar className={classes.appBar} position="static" color="inherit">
-        <div className={classes.brandContainer}>
-            <Typography className={classes.heading} component={NavLink} to="/" variant="h2" align="center"> My Memories</Typography>
-          <img className={classes.image} src={memories} alt="memories" height="60"/>
-        </div>
+        <Link to="/" className={classes.brandContainer}>
+          <img src={memoriesText} alt="icon" height="45px" />
+          <img className={classes.image} src={memoriesLogo} alt="memorieslogo" height="40px"/>
+        </Link>
         <Toolbar className={classes.toolbar}>
                {user?(<div className={classes.profile}>
                    <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
