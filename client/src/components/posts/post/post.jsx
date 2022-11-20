@@ -37,7 +37,7 @@ const Post=({post,setCurrentId})=>{
     return(
     
         <Card className={classes.card} raised elevation={6} >
-        <div onClick={openPost}   >
+        <div onClick={openPost} style={{cursor:"pointer"}}   >
 
             <CardMedia className={classes.media} image={post.SelectedFile} title={post.Title} />
             <div className={classes.overlay}>

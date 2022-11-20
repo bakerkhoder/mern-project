@@ -15,6 +15,7 @@ import mongoose from "mongoose";
             type:[String],
             default:[]
         },
+        comments:{type:[String],default:[]}
     }
  );
  const PostMessage=mongoose.model('PostMessage',postschema);

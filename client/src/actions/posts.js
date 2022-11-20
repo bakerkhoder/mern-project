@@ -5,12 +5,9 @@ import { FETCH_ALL,FETCH_POST, CREATE,DELETE,LIKE,UPDATE,FETCH_BY_SEARCH ,START_
 export const getPost=(id)=>async(dispatch)=>{
    try{
         dispatch({type:START_LOADING})
-        console.log("mn hon")
         const{data}= await api.fetchPost(id);
         console.log(data)
        await dispatch({type:FETCH_POST,payload:data})
-               console.log("hon mtwa2if")
-
         dispatch({type:END_LOADING})
        console.log("tam")
        
@@ -42,15 +39,16 @@ export const getPostsBySearch=(searchQuery)=>async(dispatch)=>{
         dispatch({type:END_LOADING})
 
     } catch(error) {
-        console.lof(error)
+        console.log(error)
     }
 }
 
-export const createPost=(post)=> async(dispatch)=>{
+export const createPost=(post,history)=> async(dispatch)=>{
     try{
         dispatch({type:START_LOADING})
         const {data}=await  api.createpost(post)
         dispatch({type:CREATE ,payload:data})
+        history.push(`/posts/${data._id}`)
     }
     catch(error){
         console.log(error)
@@ -88,3 +86,13 @@ export const deletePost =(id)=> async (dispatch)=>{
         console.log(error)
     }
  }
+
+ export const commentPost =(value ,id)=>async(dispatch)=>{
+    try{
+        const {data}=await api.comment(value,id)
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+ }
+
