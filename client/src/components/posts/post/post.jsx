@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import useStyles from "./styles"
 import {Card,CardActions,CardMedia,Button,Typography,CardContent,ButtonBase} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete"
@@ -15,19 +16,29 @@ const Post=({post,setCurrentId})=>{
     const classes = useStyles()
     const distpatch=useDispatch()
     const history =useHistory()
+    const [likes, setLikes]=useState(post?.likes)
     const user =JSON.parse(localStorage.getItem('profile'))
-    //  console.log(post.likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id)))
+    //  console.log(likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id)))
   //    function refreshPage() {
   //   window.location.reload(false);
+  const hasLikedPost= likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id))
+  const handleLike= async ()=>{
+    distpatch(likePost(post._id))
+    if(hasLikedPost){
+      setLikes(likes.filter((id)=>id!==(user?.result?._id)))
+    }else{
+      setLikes([...likes,(user?.result?.googleId || user?.result?._id)])   
+    }
+  }
   // }   
 
   const openPost=()=>{
    history.push(`/posts/${post._id}`)
   }
     const Likes=()=>  {
-    return(post.likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id))
-      ?(<><ThumbUpAlt fontSize="small"/> &nbsp;{post.likes.length } </> )
-      :(  <><ThumbUpAltOutlined fontSize="small"/>&nbsp;{post.likes.length} {post.likes.length ===1 ?"like":"likes"}</>)
+    return(likes.find((like)=>like ===(user?.result?.googleId || user?.result?._id))
+      ?(<><ThumbUpAlt fontSize="small"/> &nbsp;{likes.length } </> )
+      :(  <><ThumbUpAltOutlined fontSize="small"/>&nbsp;{likes.length} {likes.length ===1 ?"like":"likes"}</>)
     )
     }
 
@@ -60,8 +71,7 @@ const Post=({post,setCurrentId})=>{
              </CardContent>
               </div>
              <CardActions className={classes.cardActions}>
-              <Button size="small" color="primary" disabled={!user?.result} onClick={()=>{distpatch(likePost(post._id))
-            }} >
+              <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike} >
                <Likes/>
                
               </Button> 

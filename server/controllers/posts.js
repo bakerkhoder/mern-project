@@ -30,7 +30,7 @@ export const getposts=async  (req,res)=>{
     const total =await PostMessage.countDocuments({})
     const posts= await PostMessage.find().limit(LIMIT).skip(startIndex)
     res.status(200).json({data:posts,currentPage:Number(page),numberOfPages:Math.ceil(total/LIMIT)})
-    console.log("wen sar lres")
+    
   }
   catch(error){
    res.status(404).json({message:error.message})

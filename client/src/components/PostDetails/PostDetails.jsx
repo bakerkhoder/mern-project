@@ -28,7 +28,7 @@ const PostDetails = () => {
    console.log(posts)
       console.log(post)
 
-  const recommendedPosts=posts.filter(({_id})=>_id!==post._id )
+  const recommendedPosts=posts.filter(({_id})=>_id===post._id )
     console.log(recommendedPosts)
 
   const openPost=(_id)=> history.push(`/posts/${_id}`)
@@ -71,7 +71,7 @@ const PostDetails = () => {
                   <Typography variant="h6" gutterBottom >{name}</Typography>
                   <Typography variant="h6" gutterBottom >{message}</Typography>
                   <Typography variant="h6" gutterBottom >{likes.length}</Typography>
-                  <img src={SelectedFile} />
+                  <img src={SelectedFile} width="75px" />
 
                 </div>
                ))}
